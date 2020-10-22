@@ -1,3 +1,30 @@
+Funcion  option <- volver_menu()
+	
+	Definir option Como Entero;
+	
+	Escribir "quiere hacer alguna otra operacion, si es asi pulse 1, sino pulse 2";
+	leer option;				
+	si option==1 Entonces
+		option=7;
+	SiNo
+		option=6;
+	FinSi
+	
+FinFuncion
+
+Funcion pto_coma <- buscar_pto_coma(vcontacto[i])
+	
+	Definir j, pto_coma Como Entero;
+	
+	Para j=0 Hasta Longitud(vcontacto[i]) Con Paso 1 Hacer
+		si subcadena(vcontacto[i],j,j)==";" entonces
+			pto_coma = j;
+			j = Longitud(vcontacto[i]);
+		FinSi
+	Fin Para
+	
+FinFuncion
+
 Algoritmo Agenda
 	Definir option, i, j, tam, pto_coma Como Entero;
 	Definir contacto, num_contacto, registro_contacto, buscar, delete, edit, final, vcontacto Como caracter;
@@ -44,16 +71,9 @@ Algoritmo Agenda
 				Fin Para
 				
 				
+				option = volver_menu();
 				
 				
-				//Volver al menu
-				Escribir "quiere hacer alguna otra operacion, si es asi pulse 1, sino pulse 2";
-				leer option;				
-				si option==1 Entonces
-					option=7;
-				SiNo
-					option=6;
-				FinSi
 			2:
 				Escribir "Cual es el contacto que quiere buscar";
 				leer buscar;
@@ -85,14 +105,7 @@ Algoritmo Agenda
 				FinSi
 				
 				
-				//Volver al menu
-				Escribir "quiere hacer alguna otra operacion, si es asi pulse 1, sino pulse 2";
-				leer option;				
-				si option==1 Entonces
-					option=7;
-				SiNo
-					option=6;
-				FinSi
+				option = volver_menu();
 				
 			3:
 				Escribir "Cual es el contacto que quiere borrar";
@@ -128,14 +141,8 @@ Algoritmo Agenda
 				FinSi
 				
 				
-				//Volver al menu
-				Escribir "quiere hacer alguna otra operacion, si es asi pulse 1, sino pulse 2";
-				leer option;				
-				si option==1 Entonces
-					option=7;
-				SiNo
-					option=6;
-				FinSi
+				option = volver_menu();
+				
 			4:
 				Escribir "Digame el contacto que quiere editar";
 				leer edit;
@@ -188,14 +195,7 @@ Algoritmo Agenda
 								
 							De Otro Modo:
 								
-								//Volver al menu
-								Escribir "quiere hacer alguna otra operacion, si es asi pulse 1, sino pulse 2";
-								leer option;				
-								si option==1 Entonces
-									option=7;
-								SiNo
-									option=6;
-								FinSi
+								option = volver_menu();
 						Fin Segun
 					FinSi
 					
@@ -225,14 +225,7 @@ Algoritmo Agenda
 				
 				
 				
-				//Volver al menu
-				Escribir "quiere hacer alguna otra operacion, si es asi pulse 1, sino pulse 2";
-				leer option;				
-				si option==1 Entonces
-					option=7;
-				SiNo
-					option=6;
-				FinSi
+				option = volver_menu();
 			6:
 				Escribir "" Sin Saltar;
 				
