@@ -1,3 +1,4 @@
+//VOLVER AL MENU
 Funcion  option <- volver_menu()
 	
 	Definir option Como Entero;
@@ -12,31 +13,150 @@ Funcion  option <- volver_menu()
 	
 FinFuncion
 
-Funcion pto_coma <- buscar_pto_coma(vcontacto, tam)
+
+//-----------------------------------------------------------------------------------------------//
+
+
+//AÑADIR
+SubAlgoritmo opcion_añadir(mContacto, tam)
 	
-	Definir j, i, pto_coma Como Entero;
+	Definir contacto, num_contacto Como Caracter;
+	Definir  i, j, option Como Entero;
 	
-	Para j=0 Hasta Longitud(vcontacto[i]) Con Paso 1 Hacer
-		si subcadena(vcontacto[i],j,j)==";" entonces
-			pto_coma = j;
-			j = Longitud(vcontacto[i]);
-		FinSi
+	//Pedir nombre y numero
+	Escribir "Nombre del nuevo contacto";
+	leer contacto;
+	Escribir "número del nuevo contacto";
+	leer num_contacto;
+	
+	
+	//Buscar posicion vacia y asignar el contacto
+	Para j=0 Hasta tam-1 Con Paso 1 Hacer
+		Para i=0 Hasta 1 Con Paso 1 Hacer
+			si i==0 y mContacto[i,j]=="" Entonces
+				mContacto[i,j] = contacto;
+			SiNo
+				mContacto[i,j] = num_contacto;
+			FinSi
+		Fin Para
+		j=tam;
 	Fin Para
 	
-FinFuncion
+	
+FinSubAlgoritmo
 
+//-----------------------------------------------------------------------------------------------//
+
+//BUSCAR
+SubAlgoritmo opcion_buscar(mContacto, tam)
+	
+	Definir buscar Como Caracter;
+	Definir  i, j, option Como Entero;
+	Definir bandera Como Logico;
+	
+	Escribir "Cual es el contacto que quiere buscar";
+	leer buscar;
+	
+	bandera=Falso;
+	
+	//recorre todo el vector en busca de un nombre dado y te lo devuelve 
+	Para j=0 Hasta tam-1 Con Paso 1 Hacer
+		Si mContacto[i,j]==buscar Entonces
+			Escribir "Nombre: " mContacto[i,j] " ------  Numero: " mContacto[i+1,j];
+			bandera=Verdadero;
+		Fin Si
+	Fin Para
+	
+	//Mensaje confirmacion
+	si bandera==Falso Entonces
+		Escribir "No se ha encontrado ningun contacto con ese nombre";
+	FinSi
+	
+	
+	
+FinSubAlgoritmo
+
+//-----------------------------------------------------------------------------------------------//
+
+//BORRAR
+SubAlgoritmo opcion_borrar(mContacto, tam)
+	
+	Definir delete Como Caracter;
+	Definir  i, j, option Como Entero;
+	Definir bandera Como Logico;
+	
+	
+	Escribir "Cual es el contacto que quiere borrar";
+	leer delete;
+	
+	Para j=0 Hasta tam-1 Con Paso 1 Hacer
+		bandera=Falso;
+		
+		
+		Si mContacto[i,j]==delete Entonces
+			mContacto[i,j]="";
+			mContacto[i+1,j]="";
+			bandera=Verdadero;
+			j=tam;
+		Fin Si
+		
+		
+	FinPara
+	
+	si bandera==Verdadero Entonces
+		Escribir "Se a eliminado el contacto";
+		Escribir "";
+	SiNo
+		Escribir "No habia ningun contacto que eliminar con ese nombre";
+		Escribir "";
+	FinSi
+	
+FinSubAlgoritmo
+
+//-----------------------------------------------------------------------------------------------//
+
+//EDITAR
+
+
+//-----------------------------------------------------------------------------------------------//
+
+//VER TODOS LOS CONTACTOS
+SubAlgoritmo opcion_ver(mContacto, tam)
+	
+	Definir i,j Como Entero;
+	Escribir "Estos son tus contactos";
+	
+	
+	Para j=0 Hasta tam-1 Con Paso 1 Hacer
+		i=0;
+		si mContacto[i,j]<>"" Entonces
+			Escribir "Nombre: " mContacto[i,j] " ------  Numero: " mContacto[i+1,j];
+		FinSi
+		
+	Fin Para
+	
+FinSubAlgoritmo
+
+//-----------------------------------------------------------------------------------------------//
+//-----------------------------------------------------------------------------------------------//
+//-----------------------------------------------------------------------------------------------//
+
+
+//ALGORITMO PRINCIPAL
 Algoritmo Agenda
 	Definir option, i, j, tam, pto_coma Como Entero;
-	Definir contacto, num_contacto, registro_contacto, buscar, delete, edit, final, vcontacto Como caracter;
+	Definir contacto, num_contacto, registro_contacto, buscar, delete, edit, final, mContacto Como caracter;
 	Definir bandera Como Logico;
 	
 	registro_contacto="";
 	i=0;
 	tam=10;
-	Dimension vcontacto[tam];
+	Dimension mContacto[2,tam];
 	
 	Para i=0 Hasta tam-1 Con Paso 1 Hacer
-		vcontacto[i]="";
+		Para j=0 Hasta 1 Con Paso 1 Hacer
+			mContacto[j,i]="";
+		Fin Para		
 	Fin Para
 	
 	
@@ -52,166 +172,27 @@ Algoritmo Agenda
 		leer option;
 		
 		
+		
+		
 		Segun option Hacer
 			1:
-				//Pedir nombre y numero
-				Escribir "Nombre del nuevo contacto";
-				leer contacto;
-				Escribir "número del nuevo contacto";
-				leer num_contacto;
-				
-				
-				//Buscar posicion vacia y asignar el contacto
-				Para i=0 Hasta tam-1 Con Paso 1 Hacer
-					
-					si vcontacto[i]=="" Entonces
-						vcontacto[i] = contacto + ";" + num_contacto;
-						i=tam;
-					FinSi
-				Fin Para
-				
+				opcion_añadir(mContacto, tam);
 				
 				option = volver_menu();
-				
-				
 			2:
-				Escribir "Cual es el contacto que quiere buscar";
-				leer buscar;
-				
-				bandera=Falso;
-				
-				//recorre todo el vector en busca de un nombre dado y te lo devuelve 
-				Para i=0 Hasta tam-1 Con Paso 1 Hacer
-					pto_coma=0;
-					
-					//Encuentra la posicion del pto_coma
-					
-					pto_coma=buscar_pto_coma(vcontacto, tam);
-					
-					si buscar==Subcadena(vcontacto[i],0,pto_coma-1) Entonces
-						Escribir "Nombre: " + Subcadena(vcontacto[i],0,pto_coma-1) + "   -   Numero: " + Subcadena(vcontacto[i],pto_coma+1,Longitud(vcontacto[i]));
-						bandera=Verdadero;
-					FinSi
-					
-				FinPara
-				
-				//Mensaje confirmacion
-				si bandera==Falso Entonces
-					Escribir "No se ha encontrado ningun contacto con ese nombre";
-				FinSi
-				
+				opcion_buscar(mContacto, tam);
 				
 				option = volver_menu();
-				
 			3:
-				Escribir "Cual es el contacto que quiere borrar";
-				leer delete;
-				
-				Para i=0 Hasta tam-1 Con Paso 1 Hacer
-					pto_coma=0;
-					bandera=Falso;
-					//Encuentra la posicion del pto_coma
-					
-					pto_coma=buscar_pto_coma(vcontacto, tam);
-					
-					si delete==Subcadena(vcontacto[i],0,pto_coma-1) Entonces
-						vcontacto[i]="";
-						bandera=Verdadero;
-						i=tam;
-					FinSi
-					
-					
-				FinPara
-				
-				//Mensaje confirmacion
-				si bandera==Verdadero Entonces
-					Escribir "Se a eliminado el contacto";
-					Escribir "";
-				SiNo
-					Escribir "No habia ningun contacto que eliminar con ese nombre";
-					Escribir "";
-				FinSi
-				
+				opcion_borrar(mContacto, tam);
 				
 				option = volver_menu();
-				
 			4:
-				Escribir "Digame el contacto que quiere editar";
-				leer edit;
-				
-				//recorre todo el vector en busca de un nombre dado y te lo devuelve 
-				Para i=0 Hasta tam-1 Con Paso 1 Hacer
-					pto_coma=0;
-					
-					//Encuentra la posicion del pto_coma
-					pto_coma=buscar_pto_coma(vcontacto, tam);
-					
-					si edit==Subcadena(vcontacto[i],0,pto_coma-1) Entonces
-						Escribir "si solo quieres modificar el nombre pulsa 1, si solo es el numero pulsa 2, si son ambos pulsa 3 si te has equivocado y quieres salir pulsa 4";
-						
-						leer option;
-						
-						contacto=Subcadena(vcontacto[i],0,pto_coma-1);
-						num_contacto=Subcadena(vcontacto[i],pto_coma+1,Longitud(vcontacto[i]));
-						
-						Segun option Hacer
-							1:
-								Escribir "¿Cual es el nombre nuevo para tu contacto?";
-								leer final;
-								contacto=final;
-								
-								vcontacto[i]= contacto + ";" + num_contacto;
-							2:
-								Escribir "¿Cual es el numero nuevo para tu contacto?";
-								leer final;
-								num_contacto=final;
-								
-								vcontacto[i]= contacto + ";" + num_contacto;
-							3:
-								Escribir "¿Cual es el nombre nuevo para tu contacto?";
-								leer final;
-								contacto=final;
-								
-								vcontacto[i]= contacto + ";" + num_contacto;
-								
-								Escribir "¿Y cual es el numero nuevo para tu contacto";
-								leer final;
-								num_contacto=final;
-								
-								vcontacto[i]= contacto + ";" + num_contacto;
-								
-							De Otro Modo:
-								
-								option = volver_menu();
-						Fin Segun
-					FinSi
-					
-				FinPara
-				
-				
+				//opcion_editar();
 			5:
-				Escribir "Estos son tus contactos";
-				
-				
-				Para i=0 Hasta tam-1 Con Paso 1 Hacer
-					
-					si vcontacto[i]<>"" entonces
-						pto_coma=0;
-						
-						//Encuentra la posicion del pto_coma
-						pto_coma=buscar_pto_coma(vcontacto, tam);
-						
-						Escribir "Nombre: " + Subcadena(vcontacto[i],0,pto_coma-1) + "   -   Numero: " + Subcadena(vcontacto[i],pto_coma+1,Longitud(vcontacto[i]));
-					FinSi
-					
-				Fin Para
-				
-				
-				
-				option = volver_menu();
+				opcion_ver(mContacto, tam);
 			6:
 				Escribir "" Sin Saltar;
-				
 			De Otro Modo:
 				Limpiar Pantalla;
 				Escribir "Bienvenido a su agenda personal";
@@ -225,7 +206,5 @@ Algoritmo Agenda
 		Fin Segun
 		
 	Hasta Que option==6
-	
-	
 	
 FinAlgoritmo
