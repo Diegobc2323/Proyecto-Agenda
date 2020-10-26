@@ -12,9 +12,9 @@ Funcion  option <- volver_menu()
 	
 FinFuncion
 
-Funcion pto_coma <- buscar_pto_coma(vcontacto[i])
+Funcion pto_coma <- buscar_pto_coma(vcontacto, tam)
 	
-	Definir j, pto_coma Como Entero;
+	Definir j, i, pto_coma Como Entero;
 	
 	Para j=0 Hasta Longitud(vcontacto[i]) Con Paso 1 Hacer
 		si subcadena(vcontacto[i],j,j)==";" entonces
@@ -85,12 +85,8 @@ Algoritmo Agenda
 					pto_coma=0;
 					
 					//Encuentra la posicion del pto_coma
-					Para j=0 Hasta Longitud(vcontacto[i]) Con Paso 1 Hacer
-						si subcadena(vcontacto[i],j,j)==";" entonces
-							pto_coma = j;
-							j = Longitud(vcontacto[i]);
-						FinSi
-					Fin Para
+					
+					pto_coma=buscar_pto_coma(vcontacto, tam);
 					
 					si buscar==Subcadena(vcontacto[i],0,pto_coma-1) Entonces
 						Escribir "Nombre: " + Subcadena(vcontacto[i],0,pto_coma-1) + "   -   Numero: " + Subcadena(vcontacto[i],pto_coma+1,Longitud(vcontacto[i]));
@@ -115,12 +111,8 @@ Algoritmo Agenda
 					pto_coma=0;
 					bandera=Falso;
 					//Encuentra la posicion del pto_coma
-					Para j=0 Hasta Longitud(vcontacto[i]) Con Paso 1 Hacer
-						si subcadena(vcontacto[i],j,j)==";" entonces
-							pto_coma = j;
-							j = Longitud(vcontacto[i]);
-						FinSi
-					Fin Para
+					
+					pto_coma=buscar_pto_coma(vcontacto, tam);
 					
 					si delete==Subcadena(vcontacto[i],0,pto_coma-1) Entonces
 						vcontacto[i]="";
@@ -152,12 +144,7 @@ Algoritmo Agenda
 					pto_coma=0;
 					
 					//Encuentra la posicion del pto_coma
-					Para j=0 Hasta Longitud(vcontacto[i]) Con Paso 1 Hacer
-						si subcadena(vcontacto[i],j,j)==";" entonces
-							pto_coma = j;
-							j = Longitud(vcontacto[i]);
-						FinSi
-					Fin Para
+					pto_coma=buscar_pto_coma(vcontacto, tam);
 					
 					si edit==Subcadena(vcontacto[i],0,pto_coma-1) Entonces
 						Escribir "si solo quieres modificar el nombre pulsa 1, si solo es el numero pulsa 2, si son ambos pulsa 3 si te has equivocado y quieres salir pulsa 4";
@@ -211,12 +198,8 @@ Algoritmo Agenda
 					si vcontacto[i]<>"" entonces
 						pto_coma=0;
 						
-						Para j=0 Hasta Longitud(vcontacto[i]) Con Paso 1 Hacer
-							si subcadena(vcontacto[i],j,j)==";" entonces
-								pto_coma = j;
-								j = Longitud(vcontacto[i]);
-							FinSi
-						Fin Para
+						//Encuentra la posicion del pto_coma
+						pto_coma=buscar_pto_coma(vcontacto, tam);
 						
 						Escribir "Nombre: " + Subcadena(vcontacto[i],0,pto_coma-1) + "   -   Numero: " + Subcadena(vcontacto[i],pto_coma+1,Longitud(vcontacto[i]));
 					FinSi
