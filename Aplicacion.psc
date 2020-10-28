@@ -116,7 +116,58 @@ FinSubAlgoritmo
 //-----------------------------------------------------------------------------------------------//
 
 //EDITAR
-
+SubAlgoritmo opcion_editar(mContacto,tam)
+	
+	Definir option, i, j Como Entero;
+	Definir edit, nombre, num_contacto Como Caracter;
+	Definir bandera Como Logico;
+	
+	Escribir "Digame el contacto que quiere editar";
+	leer edit;
+	bandera=falso;
+	
+	
+	Para j=0 Hasta tam-1 Con Paso 1 Hacer
+		si edit==mContacto[0,j] Entonces
+			bandera=Verdadero;
+			Escribir "Si quieres editar solo el nombre pulsa 1, si quieres editar solo el numero pulsa 2, si quieres modificar ambos pulsa 3 y si te has equiocado pulsa 4";
+			leer option;
+			
+			Segun option Hacer
+				1:
+					Escribir "Cual es el nuevo nombre";
+					leer nombre;
+					mContacto[0,j]=nombre;
+				2:
+					Escribir "Cual es el nuevo numero";
+					leer num_contacto;
+					mContacto[1,j]=num_contacto;
+				3:
+					Escribir "Cual es el nuevo nombre";
+					leer nombre;
+					mContacto[0,j]=nombre;
+					
+					Escribir "Cual es el nuevo numero";
+					leer num_contacto;
+					mContacto[1,j]=num_contacto;
+				4:
+					Escribir "" Sin Saltar;
+				De Otro Modo:
+					Escribir "" Sin Saltar;
+			Fin Segun
+			
+		FinSi
+	Fin Para
+	
+	si bandera==Verdadero Entonces
+		Escribir "Se han cambiado los valores correspondientes";
+		Escribir "";
+	SiNo
+		Escribir "No habia ningun contacto que eliminar con ese nombre";
+		Escribir "";
+	FinSi
+	
+FinSubAlgoritmo
 
 //-----------------------------------------------------------------------------------------------//
 
@@ -188,9 +239,12 @@ Algoritmo Agenda
 				
 				option = volver_menu();
 			4:
-				//opcion_editar();
+				opcion_editar(mContacto,tam);
+				
+				option = volver_menu();
 			5:
 				opcion_ver(mContacto, tam);
+				option = volver_menu();
 			6:
 				Escribir "" Sin Saltar;
 			De Otro Modo:
