@@ -8,7 +8,7 @@ public class Agenda {
 		Scanner leer = new Scanner(System.in);
 		int opc=0;
 		
-		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+		
 		System.out.println("Pulsa 1 para AÑADIR un contacto");
 		System.out.println("Pulsa 2 para BUSCAR un contacto");
 		System.out.println("Pulsa 3 para BORRAR un contacto");
@@ -247,30 +247,35 @@ public class Agenda {
 				addContacto(vContacto);
 				System.out.println();
 				opc = volverMenu();
+				System.out.println("\n\n\n\n");
 				break;
 				
 			case 2:
 				buscarContacto(vContacto);
 				System.out.println();
 				opc = volverMenu();
+				System.out.println("\n\n\n\n");
 				break;
 				
 			case 3:
 				borrarContacto(vContacto);
 				System.out.println();
 				opc = volverMenu();
+				System.out.println("\n\n\n\n");
 				break;
 				
 			case 4:
 				editarContacto(vContacto);
 				System.out.println();
 				opc = volverMenu();
+				System.out.println("\n\n\n\n");
 				break;
 				
 			case 5:
 				verTodosContactos(vContacto);
 				System.out.println();
 				opc = volverMenu();		
+				System.out.println("\n\n\n\n");
 				break;
 				
 			case 6:
