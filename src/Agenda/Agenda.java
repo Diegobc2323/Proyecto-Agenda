@@ -28,17 +28,17 @@ public class Agenda {
 		System.out.println("Quieres hacer otra accion, si es asi pulsa 1, si quieres salir pulsa 2");
 		
 		
-		
 		do {
 			
 			opc = leer.nextInt();
 			
 			if (opc==1) {
 				opc=7;
+				System.out.println("\n\n\n\n");
 				return opc;
 			} else if (opc==2) {
-				opc=6;
-				return opc;
+				System.out.println("Fin");
+				System.exit(0);
 			}
 			
 		} while (opc<1 || opc>2);
@@ -128,7 +128,25 @@ public class Agenda {
 		}
 		
 	}
-	
+		
+	//Hacer este metodo
+	/*
+	public static int damePosContacto(String[][] vContacto, String nombre) {
+		
+		int pos=0;
+		
+		for (int i = 0; i < vContacto.length; i++) {
+			if (vContacto[i][0].equalsIgnoreCase(nombre)) {
+				pos=i;
+				return pos;
+			}
+		
+		}
+		
+		return -1;
+	}
+	*/
+		
 	private static void editarContacto(String[][] vContacto) {
 		Scanner leer = new Scanner(System.in);
 		Scanner leerNum = new Scanner(System.in);
@@ -139,11 +157,14 @@ public class Agenda {
 		System.out.println("Dime que contacto quieres buscar");
 		nombre = leer.nextLine();
 		
+		
+		
 		for (int i = 0; i < vContacto.length; i++) {
 			if (vContacto[i][0].equalsIgnoreCase(nombre)) {
 				
 				do {
-					System.out.println("Si quieres cambiar el nombre solo pulsa 1, si quieres cambiar solo el numero pulsa 2, si quieres cambiar ambos pulsa 3 y si no quieres cambiarlo pulsa 4");
+					System.out.println("Si quieres cambiar el nombre solo pulsa 1, si quieres cambiar solo el numero pulsa 2.");
+					System.out.println("Si quieres cambiar ambos pulsa 3 y si no quieres cambiarlo pulsa 4");
 					opc=leerNum.nextInt();
 					
 					switch (opc) {
@@ -154,9 +175,9 @@ public class Agenda {
 						break;
 						
 					case 2:
-						System.out.println("Dime el nuevo numero que le quieres poner a "+vContacto[i][1]);
+						System.out.println("Dime el nuevo numero que le quieres poner a "+vContacto[i][0]);
 						numero = leer.nextLine();
-						vContacto[i][0] = numero;
+						vContacto[i][1] = numero;
 						break;
 						
 					case 3:
@@ -166,9 +187,9 @@ public class Agenda {
 						
 						System.out.println("");
 						
-						System.out.println("Dime el nuevo numero que le quieres poner a "+vContacto[i][1]);
+						System.out.println("Dime el nuevo numero que le quieres poner a "+vContacto[i][0]);
 						numero = leer.nextLine();
-						vContacto[i][0] = numero;
+						vContacto[i][1] = numero;
 						break;
 						
 					case 4:
@@ -193,7 +214,7 @@ public class Agenda {
 		
 	}
 		
-	public static void verTodosContactos(String vContacto[][]) {
+	public static void verTodosContactos(String[][] vContacto) {
 		boolean bandera=false;
 		
 		for (int i = 0; i < vContacto.length; i++) {
@@ -201,7 +222,7 @@ public class Agenda {
 			if (!vContacto[i][0].equals("_")) {
 				for (int j = 0; j < vContacto[i].length; j++) {
 					if (j==0) {
-						System.out.print("Nombre: "+vContacto[i][j]+" ----------- ");	
+						System.out.print("Nombre del contacto "+(i+1)+": "+vContacto[i][j]+" ----------- ");	
 						bandera=true;
 					}else {
 						System.out.print("Numero: "+vContacto[i][j]);
@@ -247,35 +268,30 @@ public class Agenda {
 				addContacto(vContacto);
 				System.out.println();
 				opc = volverMenu();
-				System.out.println("\n\n\n\n");
 				break;
 				
 			case 2:
 				buscarContacto(vContacto);
 				System.out.println();
 				opc = volverMenu();
-				System.out.println("\n\n\n\n");
 				break;
 				
 			case 3:
 				borrarContacto(vContacto);
 				System.out.println();
 				opc = volverMenu();
-				System.out.println("\n\n\n\n");
 				break;
 				
 			case 4:
 				editarContacto(vContacto);
 				System.out.println();
 				opc = volverMenu();
-				System.out.println("\n\n\n\n");
 				break;
 				
 			case 5:
 				verTodosContactos(vContacto);
 				System.out.println();
 				opc = volverMenu();		
-				System.out.println("\n\n\n\n");
 				break;
 				
 			case 6:
