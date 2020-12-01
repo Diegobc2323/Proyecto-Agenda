@@ -39,6 +39,7 @@ public class Agenda {
 			} else if (opc==2) {
 				System.out.println("Fin");
 				System.exit(0);
+				
 			}
 			
 		} while (opc<1 || opc>2);
